@@ -87,7 +87,7 @@ This is a two-day course.
 |       | declarations, sections, constructors, `allocatable`     | [section-1.01](section-1.01) |
 | 10:20 | Arrays as arguments                                     |                              |
 |       | assumed shape, restrictions on arguments, ...           | [section-1.02](section-1.02) |
-| 10:40 | Pointers: recap                                         |                              |
+| 10:40 | Pointers and procedures                                 |                              |
 |       | `pointer`, `target`, `contiguous`, procedure pointers   | [section-1.03](section-1.03) |
 | 11:00 | Break                                                   |                              |
 |       |                                                         |                              |
@@ -105,9 +105,6 @@ This is a two-day course.
 | 15:00 | Break                                                   |                              |
 | 15:30 | Interfaces and abstract types                           |                              |
 |       | `type, abstract`, `deferred`                            | [section-4.01](section-4.01) |
-| 15:50 | Write an abstract class                                 |                              |
-|       | Write two concrete implementations                      |                              |
-|       | Write a factory method                                  |                              |
 | 17:00 | Close                                                   |                              |
 
 ### Day Two
@@ -116,19 +113,15 @@ This is a two-day course.
 |-------|---------------------------------------------------------|------------------------------|
 | 09:30 | Submodules                                              |                              |
 |       | `module`, `submodule`                                   | [section-5.01](section-5.01) |
-| 09:50 | Submodule exercise                                      |                              |
-|       |                                                         |                              |
 | 10:10 | Unlimited polymorphic entities                          |                              |
-|       | `class (*)`, sourced allocations                        |                              |
-| 10:30 | Exercise                                                |                              |
-|       | key value pairs  via string - class (*) pairs           |                              |
+|       | `class (*)`, typed allocations                          | [section-5.02](section-5.02) |
 | 11:00 | Break                                                   |                              |
-| 11:30 | Parameterised types                                     | 6                            |
-|       |                                                         |                              |
-| 11:50 | IEEE arithmetic support                                 |                              |
-|       |                                                         |                              |
-| 12:10 | `iso_c_binding`                                         |                              |
-|       |                                                         |                              |
+| 11:30 | Type parameters                                         | [section-6.01](section-6.01) |
+|       | `kind`, `len`                                           |                              |
+| 11:50 | Intrinsic modules                                       |                              |
+|       | `iso_fortran_env`, `ieee_exceptions`, `ieee_arithmentic`|                              |
+| 12:10 | Interoperability with C                                 |                              |
+|       | `iso_c_binding`                                         |                              |
 | 13:00 | Lunch                                                   |                              |
 | 14:00 | ...                                                     |                              |
 | 15:00 | Break                                                   |                              |
