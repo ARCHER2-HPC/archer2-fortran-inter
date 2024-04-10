@@ -187,7 +187,7 @@ end interface operator (+)
 ```
 We would then have to supply the function
 ```
-subroutine add_interval_to_date_time(date, dt) result(newdate)
+function add_interval_to_date_time(date, dt) result(newdate)
 
   type (date_time_t),     intent(in) :: date
   type (time_interval_t), intent(in) :: dt
@@ -195,7 +195,7 @@ subroutine add_interval_to_date_time(date, dt) result(newdate)
 
   ! ... details of implementation ...
 
-end subroutine add_interval_to_date_time
+end function add_interval_to_date_time
 ```
 
 An expression of the form
