@@ -63,5 +63,3 @@ with the colon:
 ```
 Here, an (optional) keyword has been used in the parameter list.
 
-
-## Exercise (5 minutes)
