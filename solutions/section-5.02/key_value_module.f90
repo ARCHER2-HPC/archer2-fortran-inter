@@ -4,14 +4,11 @@ module key_value_module
 
   ! key_value_t to hold key value pairs, where the key is a string,
   !             and the value is an unlimited polymporphic type
-  !
   ! The following interface is wanted:
-  !
   ! A generic function to return a new key_value_t for
   !    kv = key_value_t(key, int32)     key-value pair for int32 value
   !    kv = key_value_t(key, real32)    ditto for real32 value
   !    kv = key_value_t(key, string)    ditto for string value
-  !
   ! subroutine key_value_release(kv)    to release/destroy resources
   ! subroutine key_value_print(kv)      utility to print key/value pair
 
@@ -32,13 +29,71 @@ module key_value_module
     type (key_value_t), allocatable :: kv(:)     ! Expandable list
   end type key_value_list_t
 
+  interface key_value_t
+    module procedure key_value_create_i32
+    module procedure key_value_create_r32
+    module procedure key_value_create_str
+    !module procedure key_value_create_upe
+  end interface key_value_t
+
+  interface key_value_list_t
+    module procedure key_value_list_empty_t
+  end interface key_value_list_t
+
   ! We will make the specific versions private; one must use the generic
   ! name.
   private :: key_value_create_i32
   private :: key_value_create_r32
   private :: key_value_create_str
+  private :: key_value_create_upe
+
 
 contains
+
+  function key_value_create_upe(key, p) result(kv)
+
+    ! Non-allocatable, non-pointer, polymorphic dummy argument
+    character (len = *), intent(in) :: key
+    class (*),           intent(in) :: p
+    type (key_value_t)              :: kv
+
+    kv%key = trim(key)
+    allocate(kv%val, source = p)
+
+  end function key_value_create_upe
+
+  !---------------------------------------------------------------------------
+  !---------------------------------------------------------------------------
+
+  function key_value_create_i32(key, ivalue) result(kv)
+
+    ! Return aggregated key / value pair
+
+    character (len = *), intent(in) :: key
+    integer (int32),     intent(in) :: ivalue
+    type (key_value_t)              :: kv
+
+    ! assume key is valid here ...
+    kv%key = trim(key)
+    allocate(kv%val, source = ivalue)
+
+  end function key_value_create_i32
+
+  !---------------------------------------------------------------------------
+  !---------------------------------------------------------------------------
+
+  function key_value_create_r32(key, rvalue) result(kv)
+
+    ! Return aggregated key / value pair
+
+    character (len = *), intent(in) :: key
+    real (real32),       intent(in) :: rvalue
+    type (key_value_t)              :: kv
+
+    kv%key = trim(key)
+    allocate(kv%val, source = rvalue)
+
+  end function key_value_create_r32
 
   !---------------------------------------------------------------------------
   !---------------------------------------------------------------------------
@@ -58,6 +113,39 @@ contains
 
   !---------------------------------------------------------------------------
   !---------------------------------------------------------------------------
+
+  subroutine key_value_release(kv)
+
+    ! Deallocate previously initialised attribute
+
+    type (key_value_t), intent(inout) :: kv
+
+    if (allocated(kv%key)) deallocate(kv%key)
+    if (associated(kv%val)) deallocate(kv%val)
+
+  end subroutine key_value_release
+
+  !----------------------------------------------------------------------------
+  !---------------------------------------------------------------------------
+
+  subroutine key_value_print(kv)
+
+    type (key_value_t), intent(in) :: kv
+
+    select type (val => kv%val)
+      type is (integer (int32))
+        print *, "int32 kv ", kv%key, val
+      type is (real (real32))
+        print *, "real32 kv ", kv%key, val
+      type is (character (len = *))
+         print *, "string kv", kv%key, val
+      type is (real (real64))
+         print *, "real64 kv ", kv%key, val 
+      class default
+        print *, "value type not recognised kv", kv%key
+     end select
+
+  end subroutine key_value_print
 
   !----------------------------------------------------------------------------
   !----------------------------------------------------------------------------
@@ -141,7 +229,18 @@ contains
 
     type (key_value_list_t), intent(inout) :: kvlist
 
-    ! .. implementation required
+    type (key_value_t), allocatable :: kvtmp(:)
+    integer                         :: nnew
+
+    ! The list must be initialised here ...
+
+    if (.not. allocated(kvlist%kv)) stop "list not initialised!"
+
+    nnew = max(1, 2*size(kvlist%kv))
+    allocate(kvtmp(nnew))
+
+    kvtmp(1:kvlist%npair) = kvlist%kv(1:kvlist%npair)
+    call move_alloc(kvtmp, kvlist%kv)
 
   end subroutine key_value_list_reallocate
 
