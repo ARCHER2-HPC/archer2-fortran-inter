@@ -24,15 +24,4 @@ contains
 
   end function my_semi_opaque
 
-  !----------------------------------------------------------------------------
-
-  subroutine my_semi_opaque_print(label, a)
-
-    character (len = *),     intent(in) :: label
-    type (my_semi_opaque_t), intent(in) :: a
-
-    print *, "(var, idata, ndata): ", label, a%idata, a%ndata
-
-  end subroutine my_semi_opaque_print
-
 end module my_semi_opaque_type
