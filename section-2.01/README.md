@@ -184,7 +184,7 @@ required, one could write, as part of a module:
 ```
 This must be a subroutine with two arguments, the first with `intent(out)`
 (or `inout`) to represent the left-hand side of the assignment, and the
-second with `intent(in)` to represeent the right-hand side.
+second with `intent(in)` to represent the right-hand side.
 
 ### Exercise (4 minutes)
 
