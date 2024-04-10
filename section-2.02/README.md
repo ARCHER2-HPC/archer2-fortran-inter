@@ -23,7 +23,7 @@ The `generic-spec` has a number of different possible forms:
 
 We have seen an example of this type of interface in the  context of
 overloading assignment, e.g.,
-```
+```fortran
 interface assignment (=)
   module procedure :: my_assignment
 end interface assignment (=)
@@ -46,7 +46,7 @@ interface must be available in either form.
 ### Generic assignment
 
 We have seen an example of overloading assignment in the previous section:
-```
+```fortran
 interface assignment (=)
   module procedure :: my_assignment
 end interface assignment (=)
@@ -58,10 +58,10 @@ must correspond to the left-hand side of the assignment an have
 the right-hand side of the assignment and have `intent(in)`.
 
 Redefining assignment between intrinsic types is not allowed, including
-redefining conforming array assignments. It is posssible to define
+redefining conforming array assignments. It is possible to define
 assignment between an intrinsic type and a derived type. For example,
 using the `my_array_t` again from the previous section:
-```
+```fortran
 subroutine my_assignment_from_int(a, ival)
 
   type (my_array_t), intent(inout) :: a
@@ -90,13 +90,13 @@ A generic procedure allows one to associate a generic name with one or more
 specific procedures.
 ```
 interface generic-name
-  module procedure :: specific-prcedure-list
+  module procedure :: specific-procedure-list
 end interface generic-name
 ```
 The `specific-procedure-list` can be a comma-separated list of 
 different implementations, or one may add new implementation on
 different lines. For example,
-```
+```fortran
 interface my_generic_name
   module procedure :: my_real32_implementation
   module procedure :: my_real64_implementation
@@ -123,7 +123,7 @@ Together, the set of non-optional arguments in each case
 must be distinguishable. Note that the order may not be counted upon if the
 dummy arguments have the same name, as one can always call using keywords
 at the point of invocation, e.g.,
-```
+```fortran
   call my_subroutine(arg2 = y, arg1 = x)
 ```
 
@@ -137,7 +137,7 @@ Looking again at our `my_array_t` example, check that you can overload the
 default structure constructor `my_array_t()` using the existing function
 `my_array_allocate()`. A new version of the module and program are available
 in the current directory (or you can keep your existing one).
-```
+```bash
 $ ftn my_array_type.f90 example1.f90
 ```
 Add a new overloaded version to the same generic name which allows us to
@@ -149,7 +149,7 @@ implementation. Check this works as expected.
 
 The following is an edge-case which will not compile, as the dummy arguments
 of the two subroutines in the generic interface are ambiguous.
-```
+```bash
 $ ftn -c example2.f90
 ```
 There's actually a simple solution to the problem. Can you see what it is
@@ -173,20 +173,20 @@ One cannot overload operations for intrinsic types. They are only relevant
 for combinations of derived types, or derived types and intrinsic types.
 
 For example, if we had two types
-```
+```fortran
 type (date_time_t)      :: now       ! a date and time
 type (time_interval_t)  :: dt        ! interval in seconds
 ```
 one might wish to overload the meaning of `+` to allow an interval to be
 added to a date. This could be done as follows, assume we have a module
 which makes available both types:
-```
+```fortran
 interface operator (+)
   module procedure :: add_interval_to_date_time
 end interface operator (+)
 ```
 We would then have to supply the function
-```
+```fortran
 subroutine add_interval_to_date_time(date, dt) result(newdate)
 
   type (date_time_t),     intent(in) :: date
@@ -199,7 +199,7 @@ end subroutine add_interval_to_date_time
 ```
 
 An expression of the form
-```
+```fortran
 now + dt
 ```
 would then be replaced by the result of the function, which in this case
@@ -211,7 +211,7 @@ corresponds to the second dummy argument. So one could not have
 `dt + now`.
 
 One could, equivalently, invoke the function directly:
-```
+```fortran
   type (date_time_t) :: newdate
   ...
   newdate = add_interval_to_date(now, dt)
@@ -235,13 +235,13 @@ transparent set of operations for any new type.
 ### Using a non-intrinsic name
 
 We could equally define a new name
-```
+```fortran
   interface operator(.add.)
     module procedure add_interval_to_date
   end interface operator (.add.)
 ```
 in which case we would write
-```
+```fortran
    newtime = now .add. dt
 ```
 A new name must be of this form (having `.` at start and finish) and must
@@ -270,7 +270,7 @@ Does a scalar triple product $\mathbf{u}.\mathbf{v}\times\mathbf{w}$ work correc
 without parentheses?
 
 A template is provided
-```
+```bash
 $ ftn example3.f90 my_vector_type.f90
 ```
 where the example program has a number of suggestions to check the results.

@@ -8,7 +8,7 @@ In this section we look more closely at pointers in Fortran.
 
 We recall that a pointer variable may be undefined, unassociated
 (sometimes "disassociated"), or associated:
-```
+```fortran
   integer, pointer :: p1              ! undefined
   integer, pointer :: p2 => null()    ! unassociated
   integer, pointer :: p3 => t         ! associated with target t
@@ -28,7 +28,7 @@ parameters and rank of both sides of the assignment must match.
 ### Target is an array
 
 For example, if the target is an array, we might have:
-```
+```fortran
   integer, target  :: a(10)
   integer, pointer :: p(:)
 
@@ -43,7 +43,7 @@ the pointer as one would for an array. The pointer must be associated to
 do so.
 
 It is possible to specify the lower bound of a pointer array:
-```
+```fortran
   p(2:) = a(2:6)
 ```
 in which case elements are indexed from the lower bound when using the
@@ -51,7 +51,7 @@ pointer.
 
 A multi-dimensional pointer may be "reshaped" to a lower-dimensional
 target. For example:
-```
+```fortran
   integer, parameter :: n = 3
   integer, target    :: storage(n*n)
   integer, pointer   :: matrix(:, :)
@@ -65,7 +65,7 @@ included on the left-hand side of the pointer assignment.
 
 If the target of an assignment is a pointer, then subsequent changes
 in status of the target are not reflected in the later assignment, e.g.,
-```
+```fortran
   b => a
   c => b
   nullify(b)
@@ -92,7 +92,7 @@ A bare outline is provided in `example1.f90`.
 ## Pointers as arguments
 
 A dummy argument may have the pointer attribute.
-If the intent of the dummy argument is intent(inout) or intent(out), the
+If the intent of the dummy argument is `intent(inout)` or `intent(out)`, the
 relevant actual argument must also be a pointer.
 
 A pointer actual argument can correspond to a non-pointer dummy argument,
@@ -121,7 +121,7 @@ be taken via the associated dummy argument alone. This includes
 allocation status, and association status for pointers.
 
 1. Consider a case where we have a subroutine of the form
-   ```
+   ```fortran
    subroutine my_array_update(ia, ib)
      integer, intent(inout) :: ia(:)
      integer, intent(inout) :: ib(:)
@@ -137,7 +137,7 @@ allocation status, and association status for pointers.
    Procedures which have only one `intent(inout)` argument
    can reduce the scope for this potential problem.
 2. Consider a case where we have a module procedure, schematically:
-   ```
+   ```fortran
    module my_module
      ! ...
      integer, allocatable, public :: ihost(:)
@@ -173,25 +173,25 @@ in the context of procedure arguments. These may be summarised:
 
 There is a `procedure` statement which declares a name to be a procedure.
 In its simplest form, it is equivalent to an external declaration:
-```
+```fortran
   procedure () :: f_external
   external     :: f_external
 ```
 Here, the `()` indicates there is no interface information available.
 For functions, one may include information on a return type
-```
+```fortran
   procedure (integer) :: f_external
   integer, external   :: f_external
 ```
-These are again There is a `procedure` statement which declares a name to be a procedure.
-In its simplest form, it is equivalent to an external declaration:
-```
+These are again There is a `procedure` statement which declares a name to be a
+procedure. In its simplest form, it is equivalent to an external declaration:
+```fortran
   procedure () :: f_external
   external     :: f_external
 ```
 Here, the `()` indicates there is no interface information available.
 For functions, one may include information on a return type
-```
+```fortran
   procedure (integer) :: f_external
   integer, external   :: f_external
 ```
@@ -199,9 +199,9 @@ These are again equivalent..
 
 The general form is
 ```
-procedure [(interface-spec)] [, attribuite-list ::] declaration-list
+procedure [(interface-spec)] [, attribute-list ::] declaration-list
 ```
-The paranetheses accommodate an interface specification, which may be
+The parentheses accommodate an interface specification, which may be
 an interface name, or a declaration type specification (such as
 `integer` above). There are a number of
 possible attributes, including `pointer`, which declares a pointer to a
@@ -211,7 +211,7 @@ procedure.
 
 A procedure having an explicit interface may be the target of a procedure
 pointer. The declaration might be as follows:
-```
+```fortran
   interface
     function my_external_function(x) result(y)
       real, intent(in) :: x
@@ -228,7 +228,7 @@ external function. This is sometimes referred to as a _specific_ interface.
 
 We may also define an abstract procedure, which may only appear in the
 `interface-name` specification of a procedure declaration.
-```
+```fortran
   abstract interface
     function if_function(x) result(y)
       real, intent(in) :: x
@@ -237,7 +237,7 @@ We may also define an abstract procedure, which may only appear in the
   end interface
 ```
 An associated procedure definition might be
-```
+```fortran
   procedure (if_function) :: my_external_function
 ```
 This is an alternative to the specific interface declaration above.
@@ -254,7 +254,7 @@ returns an integer which is the size of the array.
 The accompanying program `example2.f90` makes a simple `procedure` declaration
 to allow the external function to be referenced (similar to an `external`
 declaration).
-```
+```bash
 $ ftn external.f90 example2.f90
 ```
 There a number of possible problems with this example (e.g., what happens

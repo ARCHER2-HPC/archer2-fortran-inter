@@ -10,12 +10,12 @@ pointer.
 We have seen a polymorphic pointer of given class used in the context
 of type extension. A more general type of pointer, an _unlimited
 polymorphic_ pointer can be declared as
-```
+```fortran
   class (*), pointer :: p => null()
 ```
 This is particularly useful if a polymorphic reference of intrinsic
 types (which cannot be extended) is required. For example:
-```
+```fortran
   real (real32), target  :: r32
   real (real64), target  :: r64
   real (real32), pointer :: p32 => null()
@@ -34,19 +34,19 @@ pointer.
 
 However, unlike the type-specific pointer, we cannot use the unlimited
 polymorphic pointer in any context, e.g.,:
-```
+```fortran
   p64 = 2.0d0      ! normal assignment ok
   p   = 2.0d0      ! compile-time error
 ```
 Pointer assignments are valid
-```
+```fortran
   p   => p32
   p   => p64
 ```
 If an unlimited polymorphic pointer is on the right-hand side of an assignment,
 then the left-hand side must be a pointer to a non-extensible derived type.
 E.g.,
-```
+```fortran
   p32  => p
 ```
 is not valid, as this allows an association to an incompatible type.
@@ -61,10 +61,10 @@ messages for each.
 ### Use of type guards
 
 Recall that we can use a `select type` construct with appropriate type
-gaurds to provide the compiler with concrete information to deal with
+guards to provide the compiler with concrete information to deal with
 the dynamic type. This is appropriate for unlimited polymorphic pointers,
 schematically:
-```
+```fortran
   class (*), pointer :: p
 
   select type (p)
@@ -83,8 +83,8 @@ similar to a constructor which specifies the type:
 ```
   allocate(type-spec :: alloc-list)
 ```
-This allows allocations against unlimmited polymorphic pointers, e.g.,
-```
+This allows allocations against unlimited polymorphic pointers, e.g.,
+```fortran
   class (*), pointer :: p    => null()
   class (*), pointer :: r(:) => null()
 
@@ -93,7 +93,7 @@ This allows allocations against unlimmited polymorphic pointers, e.g.,
 ```
 
 A useful step in many circumstances is to use sourced allocation:
-```
+```fortran
   class (*), pointer :: p => null()
 
   allocate(p, source = a)
@@ -109,7 +109,7 @@ The accompanying template module `key_value_module.f90` provides a
 derived type that is intended to store key value pairs, where the
 key is a (deferred length) string, and the value is an unlimited
 polymorphic pointer.
-```
+```fortran
   type, public :: key_value_t
     character (len = :), allocatable :: key
     class (*), pointer               :: val
@@ -137,7 +137,7 @@ The accompanying program has some examples to act as a test.
 
 It is possible to use a non-pointer unlimited polymorphic dummy argument
 in a procedure, e.g.:
-```
+```fortran
   subroutine example(upe)
 
     class (*), intent(in) :: upe

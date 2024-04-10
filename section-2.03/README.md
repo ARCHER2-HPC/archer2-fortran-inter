@@ -9,7 +9,7 @@ basis for abstraction.
 
 Suppose we had a type to represent a general category of entity
 or object, e.g.,
-```
+```fortran
 type, public :: object_t
   real :: rho           ! density
   real :: x(3)          ! position of centre of mass
@@ -17,14 +17,14 @@ end type base_t
 ```
 We can now define a more specific entity by extending the `object_t`,
 e.g.,
-```
+```fortran
 type, extends(object_t), public :: sphere_t
   real :: a             ! radius
 end type sphere_t
 ```
 This new type is said to inherit the components of the original type
 which may be accessed via the component selector in one of two ways:
-```
+```fortran
   type (sphere_t) :: s
   real            :: density
 
@@ -45,7 +45,7 @@ it has a so-called _single inheritance_ model.
 ### Structure constructors
 
 There is a default structure constructor associated with the new type
-```
+```fortran
   type (sphere_t) :: s
   real            :: rho = 1.0
   real            :: x(3) = [ 2.0, 3.0, 4.0 ]
@@ -54,16 +54,16 @@ There is a default structure constructor associated with the new type
   s = sphere_t(rho, x, radius)
 ```
 The order for the components in the structure constructor is the base
-type components first, and then the extended type compoments second.
-The components of each type alos appear in the order that they have
+type components first, and then the extended type components second.
+The components of each type also appear in the order that they have
 been declared.
 
 The order can be adjusted with the use of keywords, e.g.:
-```
+```fortran
   s = sphere_t(a = radius, rho = rho, x = x)
 ```
-We may also use the base type as a component of the structure contructor
-```
+We may also use the base type as a component of the structure constructor
+```fortran
   type (object_t) :: obj
   type (sphere_t) :: s
   real            :: a = 2.5
@@ -86,7 +86,7 @@ definitions are provided in the file `object_type.f90`.
 In the example main program, check you can provide some value for the
 new charge component via a constructor (e.g., `q = -1.0`), and access
 the charge component of the new type in both long and short forms.
-```
+```bash
 $ ftn example1.f90 object_type.f90
 ```
 
@@ -96,14 +96,14 @@ $ ftn example1.f90 object_type.f90
 In order to be able to handle types and extended types in a flexible way,
 we need a mechanism that allows a given variable to reference
 objects of different type. Such a variable is typically a pointer
-in many langauges.
+in many languages.
 
 Fortran provides the pointer mechanism using
-```
+```fortran
   class (object_t), pointer :: obj => null()
 ```
 One may also have an allocatable polymorphic object:
-```
+```fortran
   class (object_t), allocatable :: obj
 ```
 A class pointer cannot be declared as being of an
@@ -117,7 +117,7 @@ for the time being.
 ### Declared and dynamic type
 
 The declaration
-```
+```fortran
   class (object_t), pointer :: obj => null()
 ```
 allows the pointer `obj` to be associated with a target which has a type
@@ -129,7 +129,7 @@ In the above example, the _declared_ type of the polymorphic pointer is
 
 The _dynamic_ type may be changed by associating the pointer with a
 target of an extended type, e.g. with:
-```
+```fortran
   class (object_t), pointer :: obj => null()
   type (sphere_t),  target  :: s
 
@@ -139,8 +139,8 @@ the dynamic type would become `sphere_t`. The dynamic type of an
 unassociated pointer is its declared type.
 
 The polymorphic variable has access to components
-of only of the declared type, but not of its descendents. So
-```
+of only of the declared type, but not of its descendants. So
+```fortran
   class (object_t), pointer :: obj => null()
   type (sphere_t),  target  :: s
 
@@ -150,15 +150,15 @@ of only of the declared type, but not of its descendents. So
 ```
 
 Dynamic type will also be relevant when procedures are considered:
-polymorhic dummy arguments take on the dynamic type of the associated
-actual arguemnt.
+polymorphic dummy arguments take on the dynamic type of the associated
+actual argument.
 
 
 ### Exercise (2 minutes)
 
-Compile the second example togther with your updated `object_type.f90`
+Compile the second example together with your updated `object_type.f90`
 which includes a `charged_sphere_t`:
-```
+```bash
 $ ftn example2.f90 object_type.f90
 ```
 (or use the canned solution `object_types.f90`).
@@ -167,7 +167,7 @@ Comment out (don't remove for the time being) the erroneous statements
 from the example so it will compile.
 
 Why can't we just declare the pointer to be:
-```
+```fortran
  class (charged_sphere_t), pointer :: p
 ```
 in this example? What is the compiler error if you try?
@@ -180,7 +180,7 @@ of the `select type` construct, which allows appropriate action to
 to taken depending on the dynamic type. This is similar to the
 simple `select case` construct, where the behaviour is controlled
 by the dynamic type of the _selector_, here `p`:
-```
+```fortran
 select type (p)
 type is (charged_sphere_t)
   print *, "Charge is ", p%q
@@ -206,12 +206,12 @@ So at most one block is executed for any given selector.
 There are a number of intrinsic type inquiry functions which take
 polymorphic arguments, and return a logical result depending on
 dynamic type.
-```
+```fortran
   extends_type_of(a, b)
 ```
-returns `.true.` if the dynamic type of `a` is an extesion of `b`;
+returns `.true.` if the dynamic type of `a` is an extension of `b`;
 and
-```
+```fortran
   same_type_as(a, b)
 ```
 returns `.true.` if the dynamic types of both arguments are equal.
@@ -221,7 +221,7 @@ returns `.true.` if the dynamic types of both arguments are equal.
 
 Write a subroutine in `object_type.f90` which takes a single polymorphic
 argument of `object_t`, and prints out all the relevant components
-depending on the dynmaic type of the actual argument.
+depending on the dynamic type of the actual argument.
 
 Check your subroutine works by passing each different type in turn from
 the `example2.f90` program.

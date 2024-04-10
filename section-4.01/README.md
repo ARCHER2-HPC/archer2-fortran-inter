@@ -6,7 +6,7 @@ engineering.
 ## Defining an abstract type
 
 An abstract type is defined with the `abstract` attribute, schematically:
-```
+```fortran
   type, abstract, public :: my_abstract_t
     ! ... usually has no components ...
   contains
@@ -26,30 +26,30 @@ a characteristic of an abstract entity).
 
 The `deferred` attribute in the `procedure` declarations indicates
 that the actual implementation is yet to be specified
-(cf. virtual in C++). Only abstract tpyes may have `deferred`
+(cf. virtual in C++). Only abstract types may have `deferred`
 attribute for procedures. Interface blocks - typically abstract - must
 be provided for each type-bound procedure. This is done in the same
 way as for non-abstract types as we have seen before.
 
 An object of an abstract type is not permitted:
-```
+```fortran
   type (my_abstract_t) :: a            ! erroneous
 ```
 A polymorphic pointer must be used:
-```
+```fortran
   class (my_abstract_t), pointer :: a  ! ok. pointer to abstract type
 ```
 
 ### A concrete implementation
 
-A concrete implementation would extend the abtract type
-```
+A concrete implementation would extend the abstract type
+```fortran
   type, extends(my_abstract_t), public :: my_concrete_t
     private
     ! ... implementation often private ...
   contains
     procedure :: binding1 => my_implementation1
-    procedute :: binding2 => my_implementation2
+    procedure :: binding2 => my_implementation2
     ! ... and so on ...
   end type my_concrete_t
 ```
@@ -67,7 +67,7 @@ the definitions of its type-bounds procedures can remain
 
 As usual, a concrete type would typically provide some way to
 instantiate itself. Schematically,
-```
+```fortran
   function my_concrete_type_create(...) result(p)
 
     ! ... arguments ...
@@ -78,7 +78,7 @@ instantiate itself. Schematically,
   end function my_concrete_type_create
 ```
 And then, schematically,
-```
+```fortran
    class (my_abstract_t), pointer :: a => null()
 
    a => my_concrete_type_create(...)
