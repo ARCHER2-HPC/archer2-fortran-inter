@@ -16,7 +16,7 @@ We recall that the general form of the declaration is:
     procedure-part ]
   end type [ type-name ]
 ```
-Compoenents types may be intrinsic, allocatable, pointer, or other derived
+Components types may be intrinsic, allocatable, pointer, or other derived
 types. The procedure part is used (optionally) to define so-called
 _type-bound procedures_. These are the equivalent of class methods in other
 languages (and will be covered in detail in later Sections). Scope of
@@ -24,14 +24,14 @@ components may be controlled via `public` or `private` statements.
 
 Encapsulation may be achieved by declaring a `public` type with `private`
 components, e.g.,
-```
+```fortran
 type, public :: my_opaque_t
   private
   integer :: idata
 end type my_opaque_t
 ```
 It is also possible to have a mixture, e.g.:
-```
+```fortran
 type, public :: my_semi_opaque_t
   private
   integer         :: idata   ! default private
@@ -57,8 +57,8 @@ a breakdown of encapsulation.
 ### Intrinsic assignments
 
 Intrinsic assignment is available for types, and just involves an
-intrinsic assignment of each component in turn. Schemetically:
-```
+intrinsic assignment of each component in turn. Schematically:
+```fortran
   type (my_semi_opaque_t) :: a
   type (my_semi_opaque_t) :: b
 
@@ -76,7 +76,7 @@ The accompanying module `my_semi_opaque_type.f90` provides a public definition
 of the type as defined above, and includes a function to initialise the two
 components. The accompanying program `exercise1.f90` will make the intrinsic
 assignment. You can compile with, e.g.,
-```
+```bash
 $ ftn my_semi_opaque_type.f90 example1.f90
 ```
 How are you going to check that the result of the assignment is correct for
@@ -86,7 +86,7 @@ perform this check.
 ### Allocatable components
 
 Suppose our derived type had an allocatable component. For example:
-```
+```fortran
   type, public :: my_array_t
     integer           :: nlen
     real, allocatable :: values(:)
@@ -94,7 +94,7 @@ Suppose our derived type had an allocatable component. For example:
 ```
 Intrinsic assignment takes place for such an object in much the
 same way, e.g.,
-```
+```fortran
   type (my_array_t) :: a
   type (my_array_t) :: b
 
@@ -119,7 +119,7 @@ is reached.
 ### Pointer components
 
 For types with pointer components, the situation is different. Consider:
-```
+```fortran
   type, public :: my_array_pointer_t
     integer       :: nlen
     real, pointer :: values(:)
@@ -127,7 +127,7 @@ For types with pointer components, the situation is different. Consider:
 ```
 Assignment here means that the pointer becomes associated with the
 target on the right-hand side.
-```
+```fortran
   type (my_array_pointer_t) :: a
   type (my_array_pointer_t) :: b
 
@@ -147,12 +147,12 @@ pointer description itself.
 In the accompanying module `my_array_type.f90` both the types above
 have been declared, along with a function to initialise some array
 values. Compile the example program:
-```
+```bash
 $ ftn my_array_type.f90 example2.f90
 ```
 and check the values printed out. What happens if you insert a
 call to `my_array_destroy(a)` (which deallocates the values
-assoviated with the `my_array_t` argument) at the end of the
+associated with the `my_array_t` argument) at the end of the
 program and try to print the values of the pointer type `c`
 again?
 
@@ -167,7 +167,7 @@ possible to overload the meaning of the assignment operation `=`.
 
 For example, if an assignment between two objects of `my_array_t` were
 required, one could write, as part of a module:
-```
+```fortran
   subroutine my_assignment(a, b)
 
     type (my_array_t), intent(out) :: a
@@ -184,10 +184,10 @@ required, one could write, as part of a module:
 ```
 This must be a subroutine with two arguments, the first with `intent(out)`
 (or `inout`) to represent the left-hand side of the assignment, and the
-second with `intent(in)` to represeent the right-hand side.
+second with `intent(in)` to represent the right-hand side.
 
 ### Exercise (4 minutes)
 
-In `example2.f90` we explcitly assigned both components of the `my_array_pointer_t`
+In `example2.f90` we explicitly assigned both components of the `my_array_pointer_t`
 in the code and found we could not make an assignment between `my_array_pointer_t`
 and `my_array_t`. Add a subroutine in `my_array_type.f90` to make this possible.

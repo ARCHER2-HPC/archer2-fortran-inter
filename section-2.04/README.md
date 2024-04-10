@@ -13,7 +13,7 @@ A type-bound procedure is a fixed entity associated with the declaration
 of the type, and appears after the `contains` statement in the definition.
 For example, consider again the simple `object_t`. Say we wished to add
 a function to compute the volume of an object:
-```
+```fortran
   type, public ::object_t
     ! ... components ...
   contains
@@ -30,7 +30,7 @@ argument_.
 Note there is no `pointer` attribute: this is a type-bound procedure.
 
 We must provide a function
-```
+```fortran
   function object_volume(self) result(volume)
 
     class (object_t), intent(in) :: self
@@ -46,7 +46,7 @@ This is to allow that the call may be made in a context in
 which the type has been extended, i.e., `class` permits polymorphism.
 
 To invoke the new type-bound procedure, e.g.:
-```
+```fortran
   type (object_t) :: a = object_t()
 
   print *, "Volume is ", a%volume()
@@ -62,7 +62,7 @@ Using the template `object_type.f90` add the type-bound procedure `volume()`
 in the `object_t` type (only). Provide an implementation which sets the
 volume to zero. Using the accompanying program `example1.f90` check you
 can call new `volume()` procedure for an `object_t`.
-```
+```bash
 $ ftn object_type.f90 example1.f90
 ```
 Can you also use the same type-bound procedure for the sub-type
@@ -77,7 +77,7 @@ new implementation.
 
 This can be done by merely re-declaring the procedure binding in the extending
 type with the same name, e.g.,:
-```
+```fortran
   type, extends(object_t), public :: sphere_t
     ! ...
   contains
@@ -85,7 +85,7 @@ type with the same name, e.g.,:
   end type sphere_t
 ```
 Here, the `non_overridable` attribute to the binding specifies that the same
-name cannot be further overriden by types which extend `sphere_t`.
+name cannot be further overridden by types which extend `sphere_t`.
 
 An overriding procedure must have exactly the same interface as the relevant
 procedure in the parent type, bar the type of the object reference itself.
@@ -123,7 +123,7 @@ invoking object (required if it's not the first dummy argument).
 
 If one wishes to overload type-bound procedures, an additional step is
 required:
-```
+```fortran
   type, public :: my_type
     ! ...
   contains
@@ -133,15 +133,15 @@ required:
   end type my_type
 ```
 Here, the single generic name `add` is intended to be used, and must
-be asociated with distinguishable alternatives.
-As before, this may be used for assigment, operators, generic names, or
+be associated with distinguishable alternatives.
+As before, this may be used for assignment, operators, generic names, or
 derived type i/o.
 
 ## Procedure pointer as type component
 
 It is possible to declare a type which has a procedure pointer as a
 _component_:
-```
+```fortran
   type, public :: my_pp_t
     procedure (interface_pp), pointer :: p
   end type my_pp_t

@@ -13,7 +13,7 @@ will assume this is always the case unless otherwise stated.
 
 An array may be passed explicitly with information on its shape
 as part of the dummy argument list:
-```
+```fortran
   subroutine array_operation(nmax, a)
 
     integer, intent(in) :: nmax
@@ -26,7 +26,7 @@ The shapes of actual and dummy arguments must agree.
 
 As an array in Fortran is a self-describing object, there is the option to
 use _assumed shape_:
-```
+```fortran
   subroutine array_operation(a)
 
     real, intent(in) :: a(:)
@@ -34,7 +34,7 @@ use _assumed shape_:
 The size of the dummy argument can be recovered via `size()` etc. Note that
 it is the _shape_ that is passed, not the bounds; this can lead to errors
 without some care. Consider:
-```
+```fortran
    real :: a(0:nmax)
 
    call array_operation(a)
@@ -46,7 +46,7 @@ lower bound of `1`. This may not be what is expected.
 
 As a simple illustration of this problem, the following example should print out
 the values `0,0, 1.0, ...` (not `1.0, 2.0, ...`):
-```
+```fortran
 $ ftn example1.f90
 ```
 What needs to be done to correct the situation (and we want to keep
@@ -59,7 +59,7 @@ and `ubound()` invocations in the subroutine?
 
 A procedure may allocate space for temporary objects which come into
 existence when the procedure is invoked, e.g.:
-```
+```fortran
   subroutine array_operation(a)
 
     real, intent(in) :: a
@@ -77,7 +77,7 @@ put large objects on the stack. Heap storage may be preferred.
 ### Assumed size arrays
 
 Older code may contain the following syntax:
-```
+```fortran
   subroutine array_operation(a)
 
     real :: a(*)
@@ -93,7 +93,7 @@ Modern Fortran.
 ## Allocatable arguments
 
 Arguments to procedures may have the `allocatable` attribute.
-```
+```fortran
   subroutine array_example(a)
 
      real, allocatable, intent(inout) :: a(:)
@@ -106,7 +106,7 @@ entry. A number of conditions apply:
 3. Action changing the allocation status of the actual argument
    must occur via the dummy argument.
 
-Well-written procdures may need to check the allocation status of any
+Well-written procedures may need to check the allocation status of any
 allocatable arguments with `allocated()` before action is taken.
 
 ### Intent
@@ -122,12 +122,12 @@ the values may not be altered as for a normal `intent(in)` argument).
 
 The second point may cause some surprises. An intent of `inout` must be
 used if any information from the actual argument is to be visible in
-the procdure.
+the procedure.
 
 ### Functions returning allocatable arrays
 
 One can write a function having an allocatable result, e.g.,
-```
+```fortran
   function my_allocation(nlen) result(a)
 
      integer, intent(in)  :: nlen
@@ -142,7 +142,7 @@ The result must be allocated at the point of return.
 ## Array sections as arguments
 
 We may pass an array section as an actual argument. Consider:
-```
+```fortran
   subroutine my_array_operation(a)
 
     real, intent(inout) :: a(:)
@@ -152,7 +152,7 @@ We may pass an array section as an actual argument. Consider:
   end subroutine my_array_operation
 ```
 We may invoke this as
-```
+```fortran
    real :: a(5) = [ 1.0, 2.0, 3.0, 4.0, 5.0 ]
 
    call my_array_operation(a(1:5:2))
@@ -172,7 +172,7 @@ standard only says the mechanism "is usually similar to call by reference".
 
 If you wish to convince yourself of this, a version of this code has been
 provided:
-```
+```bash
 $ ftn example2.f90
 ```
 A `print` statement has been added to the subroutine to confirm that the
@@ -185,7 +185,7 @@ allocatable dummy argument with intent `out` is indeed deallocated on
 entry to the subroutine.
 
 Can an array section be passed to a subroutine where the corresponding
-dummy argument has been declared alloctable?
+dummy argument has been declared allocatable?
 
 What happens if a function with an allocatable result returns which the
 result in an unallocated state?

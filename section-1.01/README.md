@@ -3,12 +3,12 @@
 ## Declarations
 
 We may declare arrays of intrinsic type with a fairly elastic syntax, e.g.:
-```
+```fortran
   integer, dimension(10, 2) :: a
   integer, dimension(10, 2) :: b, c, d, e(10, 3)
 ```
 One may also omit the `dimension` attribute:
-```
+```fortran
   integer, dimension(10, 2) :: a
   integer                   :: b(10, 2)
 ```
@@ -27,7 +27,7 @@ fastest; we expect this to correspond to contiguous locations in memory.
 
 There are a number of ways one may obtain array sections or array-valued
 objects which may not be contiguous:
-```
+```fortran
   integer :: a(5)
   real    :: b(10, 2)
 
@@ -47,12 +47,12 @@ function which returns the scaler integer rank of the array argument.
 ## Array constructors
 
 There are a number of ways to provide initial values for array elements:
-```
+```fortran
   integer, parameter :: j(3) = (/ -1, 0, +1 /)    ! F2003
   integer, parameter :: k(3) = [  -1, 0, +1 ]     ! F2008
 ```
 One may also use an _implied do_ construction:
-```
+```fortran
   integer         :: i
   real, parameter :: s(300) = [ (i, i = 1,300) ]
   real            :: t(3)   = [ (2.0*(i*i + 1), i = 1,3) ]
@@ -64,10 +64,10 @@ data data-statement-set [[,] data-statement-set] ...
 ```
 where the `data-statement-set` consists of pairs of
 ```
-data-statment-object-list / data-statement-value-list /
+data-statement-object-list / data-statement-value-list /
 ```
 That is, one associates a list of values with a list of variables, e.g.:
-```
+```fortran
 real a, b, c
 data a, b, c / 1.0, 2.0, 3.0 /
 ```
@@ -81,7 +81,7 @@ variables.
 
 Storage for arrays may be established at run time via the `allocatable`
 attribute, e.g.:
-```
+```fortran
    real, allocatable :: a(:)
    ! ...
    allocate(a(1:nlen))
@@ -95,7 +95,7 @@ intrinsic function `allocated()`.
 
 One may combine allocation with initialisation in a number of ways
 including:
-```
+```fortran
   real, allocatable :: a(:)
   real, allocatable :: b(:)
   real, allocatable :: c(:)
@@ -106,7 +106,7 @@ including:
 ```
 Automatic reallocation is also possible for intrinsic assignments, e.g.,
 following on from the above:
-```
+```fortran
   a = [ a(:), 4.0, 5.0, 6.0 ]    ! Append to the existing elements
 ```
 
@@ -117,7 +117,7 @@ Allocatable scalars are allowed and may be useful in some circumstances.
 Formally, a zero-sized allocation is not well defined by `malloc()`
 in C. However, as Fortran arrays are objects, zero-sized arrays
 are possible:
-```
+```fortran
   integer :: a(0)      ! a zero-sized array
   integer :: b(0:0)    ! an array with one element b(0)
 ```
@@ -126,7 +126,7 @@ include conditionals to handle edge-cases where the array size might
 go to zero.
 
 Two zero-sized arrays of the same rank may have different shapes, and
-so do not necessarilty conform (although a zero-sized array always
+so do not necessarily conform (although a zero-sized array always
 confirms with a scalar, as usual). As a zero-sized array has no
 elements, it is always considered to be defined.
 
@@ -155,12 +155,12 @@ this is `-fbounds-check`.
 
 The first example contains a fixed array element reference which is
 incorrect. This should be visible to the compiler at compile time:
-```
+```bash
 $ ftn -hbounds bounds-compile-time.f90
 ```
 The second example prompts for an array index at run time. This may
 or may not be out of bounds. Check what happens at run time if the
 value of `4` is entered.
-```
+```bash
 $ ftn -hbounds bounds-run-time.f90
 ```

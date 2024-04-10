@@ -5,7 +5,7 @@
 The introductory course encouraged the use of modules to provide structure,
 and to separate public interface from private implementation.
 Schematically, we have seen:
-```
+```fortran
 module schematic
 
   ! Broadly, public "interface"
@@ -42,7 +42,7 @@ and implementation (cf. C header files) is required.
 Submodules may be organised in a tree-like hierarchy, with the ancestor
 module as the root.
 
-```
+```fortran
 module example
 
 end module example
@@ -51,7 +51,7 @@ The module should define only the interface (there should probably be
 no `contains` statement).
 
 The implementation can then be placed in a submodule:
-```
+```fortran
 submodule (example) example_a
 
 contains
@@ -69,19 +69,19 @@ submodule (parent-identifier) submodule-name
   [ module-subprogram-part]
 end [submodule [ submodule-name] ]
 ```
-where the `parent-identier` the XXX
+where the `parent-identifier` the XXX
 
 ### Submodule procedures
 
 Suppose in our module we define a new data type:
-```
+```fortran
   type, public :: example_t
     ...
   end type example_t
 ```
 We can define an interface block using this type (also in the module)
 to specify the contract:
-```
+```fortran
    interface
      module function example_t() result(e)
        type (example_t) :: e
@@ -92,7 +92,7 @@ Note the `module` at the start of the `function` declaration, and that
 there is no `import` statement required in the interface block.
 
 This would then be implemented in the `submodule` subprogram part:
-```
+```fortran
   module function example_t() result(e)
     type (example_t) :: e
     ...
@@ -106,7 +106,7 @@ and need not match).
 
 Compile (do not link) the `module` and submodule files `example.f90` and
 `example_a.f90` in the current directory. E.g.,
-```
+```bash
 $ ftn -c example.f90 example_a.f90
 ```
 Check what additional files have been generated (the exact details
@@ -117,7 +117,7 @@ just additional `.mod` files).
 ### Abbreviated form
 
 It's possible to omit the interface details in the submodule. E.g.,
-```
+```fortran
   module procedure example_t
     ...
   end procedure example_t
@@ -163,7 +163,7 @@ module, and then delete unwanted parts from each. Suggested procedure:
    interface block in `file_module.f90`. Here we will also need an
    interface for the `file_writer_from_string()` function. Check the
    new `file_module.f90` compiles on its own.
-3. Make a new (ordinary) module `file_unformatted` for the unformated
+3. Make a new (ordinary) module `file_unformatted` for the unformatted
    implementation in a separate file,
    and a new module `file_formatted` for the formatted implementation.
 5. Add a submodule to `file_module` to hold the implementation of the
