@@ -183,19 +183,7 @@ For functions, one may include information on a return type
   procedure (integer) :: f_external
   integer, external   :: f_external
 ```
-These are again There is a `procedure` statement which declares a name to be a procedure.
-In its simplest form, it is equivalent to an external declaration:
-```
-  procedure () :: f_external
-  external     :: f_external
-```
-Here, the `()` indicates there is no interface information available.
-For functions, one may include information on a return type
-```
-  procedure (integer) :: f_external
-  integer, external   :: f_external
-```
-These are again equivalent..
+These are again equivalent.
 
 The general form is
 ```
