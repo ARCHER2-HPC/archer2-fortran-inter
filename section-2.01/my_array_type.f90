@@ -13,10 +13,6 @@ module my_array_type
      real, pointer :: values(:)
   end type my_array_pointer_t
 
-  interface assignment (=)
-    module procedure my_assignment
-  end interface assignment (=)
-
 contains
 
   function my_array_allocate(nlen) result(a)
@@ -40,17 +36,5 @@ contains
     if (allocated(a%values)) deallocate(a%values)
 
   end subroutine my_array_destroy
-
-  !----------------------------------------------------------------------------
-
-  subroutine my_assignment(a, b)
-
-    type (my_array_pointer_t), intent(out) :: a
-    type (my_array_t), target, intent(in)  :: b
-
-    a%nlen = b%nlen
-    a%values => b%values
-
-  end subroutine my_assignment
 
 end module my_array_type
