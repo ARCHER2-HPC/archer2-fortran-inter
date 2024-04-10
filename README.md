@@ -127,15 +127,15 @@ This is a two-day course.
 | 11:30 | Type parameters                                         | [section-6.01](section-6.01) |
 |       | `kind`, `len`                                           |                              |
 | 11:50 | Intrinsic modules                                       |                              |
-|       | `iso_fortran_env`, `ieee_exceptions`, `ieee_arithmetic`|                              |
+|       | `iso_fortran_env`, `ieee_exceptions`, `ieee_arithmetic` | [section-6.02](section-6.02) |
 | 12:10 | Interoperability with C                                 |                              |
-|       | `iso_c_binding`                                         |                              |
+|       | `iso_c_binding`                                         | [section-6.03](section-6.03) |
 | 13:00 | Lunch                                                   |                              |
 | 14:00 | ...                                                     |                              |
 | 15:00 | Break                                                   |                              |
 | 15:20 | Exercises                                               |                              |
 |       |                                                         |                              |
-| 15:40 | Closing statements                                      |                              |
+| 15:50 | Closing statements                                      |                              |
 | 16:00 | Close                                                   |                              |
 
 ---
