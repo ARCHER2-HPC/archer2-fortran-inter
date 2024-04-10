@@ -1,4 +1,12 @@
+<img src="./img/archer2_logo.png" align="left" width="284" height="80" />
+<img src="./img/epcc_logo.png" align="right" width="248" height="66"
+    style="margin-top: 10px;" />
+
+<br /><br /><br /><br />
+
 # Intermediate Modern Fortran
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 Fortran (a contraction of Formula Translation) was the first programming
 language to have a standard (in 1954), but has changed significantly
@@ -27,7 +35,7 @@ interoperability with ANSI C. The course will cover type extension
 generic procedures ("polymorphism"), and so on. The standard `iso_c_binding`
 module provides facilities for interoperability with C; this allow the
 communication of Fortran entities with direct analogues C, and also Fortran
-objects (particularly arrays) which have no direct ananlogue in C.
+objects (particularly arrays) which have no direct analogue in C.
 
 Further language features concerning arrays, pointers, and facilities for
 structured programming using submodules will also be covered along the way.
@@ -44,25 +52,25 @@ course training accounts on ARCHER2 will be available which provide access
 to various compilers. Use of a text editor will be required (some may prefer
 an IDE, but we do not intend to consider or support IDEs).
 
-[1] This may typically be gfortran, freely available as part of the
-Gnu Compiler Collection (GCC).
+[1] This may typically be `gfortran`, freely available as part of the
+GNU Compiler Collection (GCC).
 See e.g., https://gcc.gnu.org/wiki/GFortranBinaries
 
 ## Installation
 
-For details of how to log into an ARCHER2 account, see https://docs.archer2.ac.uk/quick-start/quickstart-users/
+For details of how to log into an ARCHER2 account, see [the ARCHER2 Quickstart for users.](https://docs.archer2.ac.uk/quick-start/quickstart-users/)
 
 Check out the git repository to your laptop or ARCHER2 account.
-```
-$ git clone PENDING
+```bash
+$ git clone https://github.com/ARCHER2-HPC/archer2-fortran-inter.git
 ```
 The default Fortran compiler on ARCHER2 is the Cray Fortran compiler invoked using `ftn`.
 For example,
-```
+```bash
 $ cd section-1.01
 $ ftn example1.f90
 ```
-should generate an executable with the default name a.out.
+should generate an executable with the default name `a.out`.
 
 Each section of the course is associated with a different directory, each of which
 contains a number of example programs and exercise templates. Answers to exercises
@@ -119,7 +127,7 @@ This is a two-day course.
 | 11:30 | Type parameters                                         | [section-6.01](section-6.01) |
 |       | `kind`, `len`                                           |                              |
 | 11:50 | Intrinsic modules                                       |                              |
-|       | `iso_fortran_env`, `ieee_exceptions`, `ieee_arithmentic`|                              |
+|       | `iso_fortran_env`, `ieee_exceptions`, `ieee_arithmetic`|                              |
 | 12:10 | Interoperability with C                                 |                              |
 |       | `iso_c_binding`                                         |                              |
 | 13:00 | Lunch                                                   |                              |
@@ -129,3 +137,13 @@ This is a two-day course.
 |       |                                                         |                              |
 | 15:40 | Closing statements                                      |                              |
 | 16:00 | Close                                                   |                              |
+
+---
+This work is licensed under a
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+
+[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
