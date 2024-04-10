@@ -25,7 +25,7 @@ types (which cannot be extended) is required. For example:
 
   p32 => r32      ! ok
   p64 => r64      ! compile-time error
-  p   => r34      ! ok
+  p   => r32      ! ok
   p   => r64      ! ok
 ```
 While we cannot associate a pointer of a fixed type (`p64`) with a
