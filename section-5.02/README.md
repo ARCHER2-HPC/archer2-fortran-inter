@@ -68,9 +68,9 @@ schematically:
   class (*), pointer :: p
 
   select type (p)
-    type is (real32)
+    type is (real(real32))
       ! ... action for real32 ...
-    type is (real64)
+    type is (real(real64))
       ! ... action for real64 ...
   end select
 ```
