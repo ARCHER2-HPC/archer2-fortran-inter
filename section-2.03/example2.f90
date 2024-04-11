@@ -8,9 +8,6 @@ program example2
   type (charged_sphere_t), target :: cs
 
   class (object_t), pointer       :: p => null()
-  ! no can do ...
-  !class (charged_sphere_t), pointer       :: p => null()
-
 
   obj = object_t(rho = 1.0, x = [1.0, 2.0, 3.0])
   s   = sphere_t(object_t = obj, a = 2.5)
