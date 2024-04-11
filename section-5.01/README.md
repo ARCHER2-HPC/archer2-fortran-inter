@@ -69,7 +69,7 @@ submodule (parent-identifier) submodule-name
   [ module-subprogram-part]
 end [submodule [ submodule-name] ]
 ```
-where the `parent-identier` the XXX
+where the `parent-identier` is name of the parent module.
 
 ### Submodule procedures
 
