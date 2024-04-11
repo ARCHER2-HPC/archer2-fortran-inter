@@ -43,20 +43,20 @@ Submodules may be organised in a tree-like hierarchy, with the ancestor
 module as the root.
 
 ```
-module example
+module example_module
 
-end module example
+end module example_module
 ```
 The module should define only the interface (there should probably be
 no `contains` statement).
 
 The implementation can then be placed in a submodule:
 ```
-submodule (example) example_a
+submodule (example_module) example_submodule
 
 contains
 
-end submodule example_a
+end submodule example_submodule
 ```
 Note: 1. the submodule automatically has access to the declarations in
 the `example` module via host association. There is no need to `use`
@@ -82,19 +82,21 @@ Suppose in our module we define a new data type:
 We can define an interface block using this type (also in the module)
 to specify the contract:
 ```
-   interface
-     module function example_t() result(e)
-       type (example_t) :: e
-     end function example_t
-   end interface
+   interface example_t
+     module function example_int_t(ival) result(e)
+       integer, intent(in) :: ival
+       type (example_t)    :: e
+     end function example_int_t
+   end interface example_t
 ```
 Note the `module` at the start of the `function` declaration, and that
 there is no `import` statement required in the interface block.
 
 This would then be implemented in the `submodule` subprogram part:
 ```
-  module function example_t() result(e)
-    type (example_t) :: e
+  module function example_int_t(ival) result(e)
+    integer, intent(in) :: ival
+    type (example_t)    :: e
     ...
   end function example_t
 ```
@@ -107,7 +109,8 @@ and need not match).
 Compile (do not link) the `module` and submodule files `example.f90` and
 `example_a.f90` in the current directory. E.g.,
 ```
-$ ftn -c example.f90 example_a.f90
+$ ftn -c example_module.f90
+$ ftn -c example_submodule.f90
 ```
 Check what additional files have been generated (the exact details
 will depend on the compiler: some produce `.smod` files, others
@@ -131,6 +134,13 @@ keep the full form.
 
 ### Host association and use association
 
+A submodule has access to entities in the parent module automatically
+by host associatio, but may also `use` other modules in the standard
+way.
+
+A submodule of `module a` can access `module b` but `use` association.
+In addition, a submodule of `module b` can access `module a`. This
+breaks the circular dependency problem in standard modules.
 
 ### Submodule declarations
 
