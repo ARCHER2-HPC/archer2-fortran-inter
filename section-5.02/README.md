@@ -24,7 +24,7 @@ types (which cannot be extended) is required. For example:
   class (*), pointer     :: p => null()
 
   p32 => r32      ! ok
-  p64 => r64      ! compile-time error
+  p64 => r32      ! compile-time error
   p   => r32      ! ok
   p   => r64      ! ok
 ```
