@@ -173,7 +173,7 @@ module, and then delete unwanted parts from each. Suggested procedure:
    interface block in `file_module.f90`. Here we will also need an
    interface for the `file_writer_from_string()` function. Check the
    new `file_module.f90` compiles on its own.
-3. Make a new (ordinary) module `file_unformatted` for the unformated
+3. Make a new (ordinary) module `file_unformatted` for the unformatted
    implementation in a separate file,
    and a new module `file_formatted` for the formatted implementation.
 5. Add a submodule to `file_module` to hold the implementation of the
@@ -186,5 +186,3 @@ All the Fortran sources should be compiled together to produce an
 executable.
 
 What further decomposition into submodules could we make at this point?
-
-

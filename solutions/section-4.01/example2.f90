@@ -1,6 +1,6 @@
 program example1
 
-  ! Write two files via abstract mechamism.
+  ! Write two files via abstract mechanism.
   ! Compile: ftn file_module.f90 example2.f90
 
   use file_module

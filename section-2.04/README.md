@@ -85,7 +85,7 @@ type with the same name, e.g.,:
   end type sphere_t
 ```
 Here, the `non_overridable` attribute to the binding specifies that the same
-name cannot be further overriden by types which extend `sphere_t`.
+name cannot be further overridden by types which extend `sphere_t`.
 
 An overriding procedure must have exactly the same interface as the relevant
 procedure in the parent type, bar the type of the object reference itself.
@@ -133,8 +133,8 @@ required:
   end type my_type
 ```
 Here, the single generic name `add` is intended to be used, and must
-be asociated with distinguishable alternatives.
-As before, this may be used for assigment, operators, generic names, or
+be associated with distinguishable alternatives.
+As before, this may be used for assignment, operators, generic names, or
 derived type i/o.
 
 ## Procedure pointer as type component

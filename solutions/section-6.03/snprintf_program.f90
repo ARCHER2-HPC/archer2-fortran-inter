@@ -21,5 +21,5 @@ program example1
   nwrite = f_snprintf_double(str, sz, trim(cformat), y)
   print *, "return value ", nwrite
   print *, "String ", trim(str)
-  
+
 end program example1

@@ -12,5 +12,5 @@ contains
     e%data = ival
 
   end function example_int_t
-  
+
 end submodule example_submodule

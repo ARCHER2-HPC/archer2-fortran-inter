@@ -3,7 +3,7 @@
 Fortran 2003 introduced facilities to allow a Fortran program to interact
 with C in a standardised way.
 
-## The instrinsic module `iso_c_binding`
+## The intrinsic module `iso_c_binding`
 
 Fortran has introduced the idea of _interoperable_ entities, which
 have declarations which have an analogue in C. (Strictly C, not C++.
@@ -182,7 +182,7 @@ return value?
 
 If you were to implement interfaces for both the `c_snprintf_float()`
 and `c_snprintf_double()` versions, you might wonder whether you could
-overload the specifc names with a generic name.
+overload the specific names with a generic name.
 
 ## Arrays
 
@@ -245,14 +245,14 @@ non-zero size (or allocated non-zero size), or an associated pointer.
 The argument must be of interoperable type. The argument must be a
 pointer or a data object with target attribute.
 
-- `c_funloc(p)` can return the address of an interoperable procedure. 
+- `c_funloc(p)` can return the address of an interoperable procedure.
 
 - `c_associated(c_ptr1 [, c_ptr2])` if an analogue of the `associated()`
 intrinsic which returns `.true.` if the first argument is not
 `c_null_ptr`. If the second argument is present, the function will
 return `.true.` if both arguments are the same.
 
-- `c_f_pointer(c_ptr, fptr [, shape])` provides functionality to tranlate a `c_ptr`
+- `c_f_pointer(c_ptr, fptr [, shape])` provides functionality to translate a `c_ptr`
   type into a Fortran pointer. A rank 1 integer array shape is
   required if `fptr` is an array.
 
@@ -265,7 +265,7 @@ return `.true.` if both arguments are the same.
 To be interoperable, a Fortran derived type must map to a plain C struct
 with interoperable compments. This means the Fortran type must have no
 type-bound procedures, cannot be extended, cannot have components that
-have either the allocatable or pointer attributes, 
+have either the allocatable or pointer attributes,
 
 The type should be declared as bind(c), e.g.,
 ```
@@ -279,7 +279,7 @@ The presence of the `bind(c)` means the type cannot be extended.
 
 ## Calling Fortran from C
 
-Let us suppose we have a C program whioch defines a `struct`
+Let us suppose we have a C program which defines a `struct`
 ```
 typedef struct array_s {
   int nlen;
@@ -324,7 +324,7 @@ a call to `c_f_pointer()` before it can be used.
 ### Exerise (10 minutes)
 
 Check you can construct a working example based on the above outline.
-Initialise some sample values and chcek you can recover the values in
+Initialise some sample values and check you can recover the values in
 the Fortran subroutine.
 
 Try using either the C or the Fortran compiler to perform the link stage.

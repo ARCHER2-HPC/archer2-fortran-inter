@@ -1,7 +1,7 @@
 program example1
 
   ! Write a file using the concrete class for formatted output.
-  ! Compile with: ftn file_module.f90 example1.f90 
+  ! Compile with: ftn file_module.f90 example1.f90
 
   use file_module
   implicit none

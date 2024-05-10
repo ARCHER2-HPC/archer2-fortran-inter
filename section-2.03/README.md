@@ -54,15 +54,15 @@ There is a default structure constructor associated with the new type
   s = sphere_t(rho, x, radius)
 ```
 The order for the components in the structure constructor is the base
-type components first, and then the extended type compoments second.
-The components of each type alos appear in the order that they have
+type components first, and then the extended type components second.
+The components of each type also appear in the order that they have
 been declared.
 
 The order can be adjusted with the use of keywords, e.g.:
 ```
   s = sphere_t(a = radius, rho = rho, x = x)
 ```
-We may also use the base type as a component of the structure contructor
+We may also use the base type as a component of the structure constructor
 ```
   type (object_t) :: obj
   type (sphere_t) :: s
@@ -96,7 +96,7 @@ $ ftn example1.f90 object_type.f90
 In order to be able to handle types and extended types in a flexible way,
 we need a mechanism that allows a given variable to reference
 objects of different type. Such a variable is typically a pointer
-in many langauges.
+in many languages.
 
 Fortran provides the pointer mechanism using
 ```
@@ -151,12 +151,12 @@ of only of the declared type, but not of its descendents. So
 
 Dynamic type will also be relevant when procedures are considered:
 polymorhic dummy arguments take on the dynamic type of the associated
-actual arguemnt.
+actual argument.
 
 
 ### Exercise (2 minutes)
 
-Compile the second example togther with your updated `object_type.f90`
+Compile the second example together with your updated `object_type.f90`
 which includes a `charged_sphere_t`:
 ```
 $ ftn example2.f90 object_type.f90
@@ -209,7 +209,7 @@ dynamic type.
 ```
   extends_type_of(a, b)
 ```
-returns `.true.` if the dynamic type of `a` is an extesion of `b`;
+returns `.true.` if the dynamic type of `a` is an extension of `b`;
 and
 ```
   same_type_as(a, b)
@@ -221,7 +221,7 @@ returns `.true.` if the dynamic types of both arguments are equal.
 
 Write a subroutine in `object_type.f90` which takes a single polymorphic
 argument of `object_t`, and prints out all the relevant components
-depending on the dynmaic type of the actual argument.
+depending on the dynamic type of the actual argument.
 
 Check your subroutine works by passing each different type in turn from
 the `example2.f90` program.
@@ -232,4 +232,3 @@ the `example2.f90` program.
 Type constructors again. Write some generic constructors for object types
 which take different data types as arguments. For example, it might be a
 convenience to be able to specify the position as a three-vector of integers.
-
