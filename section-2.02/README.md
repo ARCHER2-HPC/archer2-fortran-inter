@@ -53,12 +53,12 @@ end interface assignment (=)
 ```
 In this context, the procedure must be a subroutine (not a function) with
 exactly two non-optional arguments. To prevent ambiguity, the first argument
-must correspond to the left-hand side of the assignment an have 
+must correspond to the left-hand side of the assignment an have
 `intent(inout)` or `intent(out)`, while the second argument must represent
 the right-hand side of the assignment and have `intent(in)`.
 
 Redefining assignment between intrinsic types is not allowed, including
-redefining conforming array assignments. It is posssible to define
+redefining conforming array assignments. It is possible to define
 assignment between an intrinsic type and a derived type. For example,
 using the `my_array_t` again from the previous section:
 ```
@@ -72,7 +72,7 @@ subroutine my_assignment_from_int(a, ival)
 end subroutine my_assignment_from_int
 ```
 In this way, one can have a number of different procedures which overload the
-assignment: they are generic. 
+assignment: they are generic.
 
 If the right-hand side is an expression, one can consider the assignment as
 being replaced by a call to the subroutine, with the second argument being
@@ -93,7 +93,7 @@ interface generic-name
   module procedure :: specific-prcedure-list
 end interface generic-name
 ```
-The `specific-procedure-list` can be a comma-separated list of 
+The `specific-procedure-list` can be a comma-separated list of
 different implementations, or one may add new implementation on
 different lines. For example,
 ```
@@ -274,4 +274,3 @@ A template is provided
 $ ftn example3.f90 my_vector_type.f90
 ```
 where the example program has a number of suggestions to check the results.
-

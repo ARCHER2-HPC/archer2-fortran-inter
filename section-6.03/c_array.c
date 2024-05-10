@@ -10,4 +10,3 @@ void c_array(int mlen, int nlen, int idata[][mlen]) {
   }
   return;
 }
-

@@ -18,7 +18,7 @@ program example2
   print *, "object density  ", p%rho
   print *, "object position ", p%x(:)
   !print *, "object radius   ", p%a
-  
+
   p => s
 
   print *, "sphere density  ", p%rho

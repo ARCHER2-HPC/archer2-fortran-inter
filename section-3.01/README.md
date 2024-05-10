@@ -9,7 +9,7 @@ output in which each component appears in order, schematically:
   ! ...
   write (*, fmt = *) a
 ```
-will write out all the compoments with some default format for the given
+will write out all the components with some default format for the given
 components.
 
 Alternatively, if we know the components, we could write out each component
@@ -70,7 +70,7 @@ requires
 
   end subroutine my_type_unformatted_output
 ```
-The `iostat` and `iomsg` variables take on their usualy meaning in the context
+The `iostat` and `iomsg` variables take on their usually meaning in the context
 of `write()`.
 The `iostat` variable is zero on success, but should take a positive value if
 an error occurs. If `iostat` is non-zero, `iomsg`
@@ -82,7 +82,7 @@ be of `intent(inout)`.
 ### Formatted output
 
 The formatted case includes the addition `iodesc-string` and `v-list`
-arguemnts:
+arguments:
 ```
  subroutine my_type_write_formatted(self, unit, iotype, vlist, iostat, iomsg)
 
@@ -148,4 +148,3 @@ First, try list directed I/O: the format we would like is `dd/mm/yyyy` for
 Then try adding the `dt` edit descriptor to allow some more flexibility. For
 example, a `vlist` of 3 integers might control the width of the fields for
 each part of the date. This requires constructing an appropriate format string.
-
