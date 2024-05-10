@@ -101,37 +101,35 @@ This is a two-day course.
 |       |                                                         |                              |
 | 11:30 | Derived types                                           |                              |
 |       | `type`, components, assignments and copying             | [section-2.01](section-2.01) |
-| 11:50 | Interfaces and generic procedures                       |                              |
-|       | `interface`, `operator`                                 | [section-2.02](section-2.02) |
-| 12:20 | Type extension and polymorphism                         |                              |
-|       | `type, extends(...)`, `class`                           | [section-2.03](section-2.03) |
-| 12:40 | Type-bound procedures                                   |                              |
-|       | `contains` `procedure`, `pass`, `generic`               | [section-2.04](section-2.04) |
 | 13:00 | Lunch                                                   |                              |
-| 14:00 | Input/output for types                                  |                              |
-|       | `write(formatted)`                                      | [section-3.01](section-3.01) |
+| 14:00 | Interfaces and generic procedures                       |                              |
+|       | `interface`, `operator`                                 | [section-2.02](section-2.02) |
 | 15:00 | Break                                                   |                              |
-| 15:30 | Interfaces and abstract types                           |                              |
-|       | `type, abstract`, `deferred`                            | [section-4.01](section-4.01) |
+| 15:20 | Type extension and polymorphism                         |                              |
+|       | `type, extends(...)`, `class`                           | [section-2.03](section-2.03) |
+| 16:00 | Type-bound procedures                                   |                              |
+|       | `contains` `procedure`, `pass`, `generic`               | [section-2.04](section-2.04) |
+| 16:30 | Input/output for types                                  |                              |
+|       | `write(formatted)`                                      | [section-3.01](section-3.01) |
 | 17:00 | Close                                                   |                              |
 
 ### Day Two
 
 | Time  | Content                                                 | Section                      |
 |-------|---------------------------------------------------------|------------------------------|
-| 09:30 | Submodules                                              |                              |
+| 09:30 | Interfaces and abstract types                           |                              |
+|       | `type, abstract`, `deferred`                            | [section-4.01](section-4.01) |
+| 10:30 | Submodules                                              |                              |
 |       | `module`, `submodule`                                   | [section-5.01](section-5.01) |
-| 10:10 | Unlimited polymorphic entities                          |                              |
-|       | `class (*)`, typed allocations                          | [section-5.02](section-5.02) |
 | 11:00 | Break                                                   |                              |
-| 11:30 | Type parameters                                         | [section-6.01](section-6.01) |
-|       | `kind`, `len`                                           |                              |
-| 11:50 | Intrinsic modules                                       |                              |
+|       |                                                         |                              |
+| 11:30 | Unlimited polymorphic entities                          |                              |
+|       | `class (*)`, typed allocations                          | [section-5.02](section-5.02) |
+| 12:30 | Intrinsic modules                                       |                              |
 |       | `iso_fortran_env`, `ieee_exceptions`, `ieee_arithmetic` | [section-6.02](section-6.02) |
-| 12:10 | Interoperability with C                                 |                              |
-|       | `iso_c_binding`                                         | [section-6.03](section-6.03) |
 | 13:00 | Lunch                                                   |                              |
-| 14:00 | ...                                                     |                              |
+| 14:00 | Interoperability with C                                 |                              |
+|       | `iso_c_binding`                                         | [section-6.03](section-6.03) |
 | 15:00 | Break                                                   |                              |
 | 15:20 | Exercises                                               |                              |
 |       |                                                         |                              |
