@@ -14,7 +14,7 @@ attribute, e.g.,
 ```
   use, intrinsic :: iso_fortran_env
 ```
-This true intrinsic `iso_fortran_env` will then be used in preferrence to
+This true intrinsic `iso_fortran_env` will then be used in preference to
 any other module with the same name.
 
 Likewise a non-intrinsic module can be used:
@@ -97,4 +97,3 @@ is separated into three modules.
    point numbers (aka denormalised numbers, with a leading zero in the mantissa).
 
 A full description of the IEEE features will not be attempted here.
-

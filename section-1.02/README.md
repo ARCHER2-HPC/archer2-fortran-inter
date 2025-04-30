@@ -189,5 +189,3 @@ dummy argument has been declared alloctable?
 
 What happens if a function with an allocatable result returns which the
 result in an unallocated state?
-
-

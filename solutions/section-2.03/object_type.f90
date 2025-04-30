@@ -5,7 +5,7 @@ module object_type
 
   type, public :: object_t
     real :: rho  = 1.0       ! density
-    real :: x(3) = 0.0       ! poistion of centre of mass
+    real :: x(3) = 0.0       ! position of centre of mass
   end type object_t
 
   type, extends(object_t), public :: sphere_t

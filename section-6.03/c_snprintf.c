@@ -10,4 +10,3 @@ int c_snprintf_double(char * str, size_t size, const char * format, double x) {
 
   return snprintf(str, size, format, x);
 }
-

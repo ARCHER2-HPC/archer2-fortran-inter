@@ -13,7 +13,7 @@ module key_value_module
   ! subroutine key_value_print(kv)      utility to print key/value pair
 
   ! key_value_list_t an exapndable list of key_value_t pairs
-  
+
   use iso_fortran_env
 
   implicit none
@@ -140,7 +140,7 @@ contains
       type is (character (len = *))
          print *, "string kv", kv%key, val
       type is (real (real64))
-         print *, "real64 kv ", kv%key, val 
+         print *, "real64 kv ", kv%key, val
       class default
         print *, "value type not recognised kv", kv%key
      end select

@@ -62,4 +62,3 @@ with the colon:
   type (my_array_t(real32, nlen = :)), pointer p => null()
 ```
 Here, an (optional) keyword has been used in the parameter list.
-

@@ -37,5 +37,5 @@ program test1
   p => s
   print *, "Sphere volume    ", p%volume()
   print *, "Sphere mass      ", p%mass()
-  
+
 end program test1
